@@ -11,6 +11,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: cd
+        run: cd
+
+      - name: ls
+        run: ls
+
       - name: Build with Buildozer
         run: bash ~/build.sh
 
