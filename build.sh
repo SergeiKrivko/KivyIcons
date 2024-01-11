@@ -14,6 +14,8 @@ export PATH=$PATH:~/.local/bin/
 
 ls
 
+/home/runner/work/KivyIcons/KivyIcons/venv/bin/python3 -m pip install -q --user appdirs colorama>=0.3.3 jinja2 "sh>=1.10, <2.0; sys_platform!='win32'" build toml packaging
+
 venv/bin/buildozer android debug
 
 ls
