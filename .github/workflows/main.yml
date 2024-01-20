@@ -31,14 +31,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          path: master
 
       - name: Install dependencies
         run: |
           python3.11 -m pip install --upgrade pip virtualenv
-  
-          cd /Users/runner/work/gpt-chat-kivy/gpt-chat-kivy/master
           python3.11 -m venv venv
           source venv/bin/activate
   
@@ -49,7 +45,6 @@ jobs:
 
       - name: Build with buildozer
         run: |
-          cd /Users/runner/work/gpt-chat-kivy/gpt-chat-kivy/master
           source venv/bin/activate
           venv/bin/python3.11 -m buildozer ios debug
 
