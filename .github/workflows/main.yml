@@ -2,27 +2,34 @@ name: Build
 on: [push, pull_request]
 
 jobs:
-#  # Build job. Builds app for Android with Buildozer
-#  build-android:
-#    name: Build for Android
-#    runs-on: ubuntu-latest
+#  build-ios:
+#    name: Build for iOS
+#    runs-on: macos-latest
 #
 #    steps:
 #      - name: Checkout
 #        uses: actions/checkout@v2
 #
-#      - name: Build with Buildozer
-#        uses: ArtemSBulgakov/buildozer-action@v1
-#        id: buildozer
-#        with:
-#          workdir: .
-#          buildozer_version: stable
+#      - name: Install dependencies
+#        run: |
+#          python3.11 -m pip install --upgrade pip virtualenv
+#          python3.11 -m venv venv
+#          source venv/bin/activate
 #
-#      - name: Upload artifacts
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: package
-#          path: ${{ steps.buildozer.outputs.filename }}
+#          venv/bin/python3.11 -m pip install --upgrade kivy-ios buildozer
+#          venv/bin/python3.11 -m pip install --upgrade Cython==0.29.36 cookiecutter pbxproj
+#
+#          brew install sdl2 sdl2_image sdl2_ttf sdl2_mixer gstreamer automake cython
+#
+#      - name: Build with buildozer
+#        run: |
+#          source venv/bin/activate
+#          venv/bin/python3.11 -m buildozer ios debug
+#
+#      - name: LS
+#        run: |
+#          ls
+#          ls ./bin
 
   build-ios:
     name: Build for iOS
@@ -35,20 +42,29 @@ jobs:
       - name: Install dependencies
         run: |
           python3.11 -m pip install --upgrade pip virtualenv
+
+          cd ..
           python3.11 -m venv venv
           source venv/bin/activate
-  
-          venv/bin/python3.11 -m pip install --upgrade kivy-ios buildozer
-          venv/bin/python3.11 -m pip install --upgrade Cython==0.29.36 cookiecutter pbxproj
-  
+
+          venv/bin/python3.11 -m pip install --upgrade kivy==2.2.1 kivy-ios
+          venv/bin/python3.11 -m pip install --upgrade Cython==0.29.36
+
           brew install sdl2 sdl2_image sdl2_ttf sdl2_mixer gstreamer automake cython
 
       - name: Build with buildozer
         run: |
+          cd ..
           source venv/bin/activate
-          venv/bin/python3.11 -m buildozer ios debug
+
+          toolchain build python3
+          toolchain build kivy
+
+          toolchain create master
 
       - name: LS
         run: |
+          cd ..
           ls
-          ls ./bin
+          ls kivyicons-ios
+
