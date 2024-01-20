@@ -39,7 +39,7 @@ jobs:
           source venv/bin/activate
   
           venv/bin/python3.11 -m pip install --upgrade kivy-ios buildozer
-          venv/bin/python3.11 -m pip install --upgrade Cython==0.29.36
+          venv/bin/python3.11 -m pip install --upgrade Cython==0.29.36 cookiecutter pbxproj
   
           brew install sdl2 sdl2_image sdl2_ttf sdl2_mixer gstreamer automake cython
 
