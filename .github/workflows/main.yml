@@ -60,7 +60,7 @@ jobs:
           toolchain build python3
           toolchain build kivy
 
-          toolchain create master
+          toolchain create KivyIcons
 
       - name: LS
         run: |
